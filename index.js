@@ -4,16 +4,17 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const Animal = require('./models/animal');
+const Comment = require('./models/comment');
 // SERVER
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));        // OR app.set('views', process.cwd() + '/views' )
 
 // DATABASE 
 
-mongoose.connect(config.mongoDBAtlasURI, {useNewUrlParser: true})
+mongoose.connect(config.mongoDBAtlasURI, { useNewUrlParser: true })
     .then(() => {
         console.log('Connected to MongoDB Atlas via Mongoose.');
     });
@@ -24,45 +25,39 @@ mongoose.connect(config.mongoDBAtlasURI, {useNewUrlParser: true})
 
 // APP FUNCTIONALITY 
 
-const comments = [{
-    comment: 'that is so funny hahaha',
-    writer: 'Alexis'
-},
-{
-    comment: 'yea right...',
-    writer: 'Olivia'
-},
-{
-    comment: 'is she really going to do that?',
-    writer: 'John'
-},
-{
-    comment: 'i think so.. man that is hilarious!!!',
-    writer: 'Abba'
-}]; // props: comment, writer
-
 app.listen(config.PORT, () => {
     console.log(`app listening on PORT${config.PORT}!`);
 });
 
-
 app.get('/comments', (req, res) => {
-    res.render('./comments/comments', {comments: comments})
+    Comment.find()                      // can we use CACHE and save load time??
+        .then(c => {
+            res.render('./comments/comments', {comments: c})
+        })
+        .catch(err => {
+            console.log(err)
+        })
 })
-app.post('/comments', (req, res) => {
-    console.log(req.body)
-    const {comment, author} = req.body;
-    comments.push({comment, writer: author});
-    res.redirect('/comments');
+
+app.post('/comments', async (req, res) => {
+    console.log(req.body);
+    const newComment = new Comment(req.body);
+    await newComment.save()
+        .then(() => {
+            console.log('saved new comment to database');
+            res.redirect('/comments')
+        })
+        .catch(err => console.log(err));
 })
-app.get('/comments/new', (req, res) => {
+app.get('/comments/newcomment', (req, res) => {
     res.render('./comments/newcomment')
 })
 
 app.get('/animals', (req, res) => {
-    Animal.find()
+    Animal.findOne({ name: 'Blue Whale' })
         .then(data => {
-            console.log(data);
+            console.log('your data: ', data);
+            console.log('your data id: ', data._id)
             res.send(data);
         })
         .catch(err => {

@@ -5,7 +5,7 @@ const animalSchema = mongoose.Schema({
     isEndangered: Boolean,
     dateOfEntry: {
         type: String,
-        default: new Date().toLocaleTimeString()
+        default: new Date().toDateString()
     }
 });
 

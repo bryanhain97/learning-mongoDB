@@ -13,10 +13,11 @@
     <ul>
         <% for(let comment of comments){ %>
             <li>
-                <%=comment.comment %> - <b><%=comment.writer %></b>
+                <%=comment.comment%> - <b><%=comment.writer%></b> <i><%=comment.dateOfEntry %></i>
             </li>
-        <% } %>
+            <% } %>
     </ul>
+    <a href="http://localhost:3000/comments/newcomment"><button>Add comment</button></a>
 </body>
 
 </html>
