@@ -13,7 +13,7 @@
     <ul>
         <% for(let comment of comments){ %>
             <li>
-                <%=comment.comment%> - <b><%=comment.writer%></b> <i><%=comment.dateOfEntry %></i>
+                <a href="http://localhost:3000/comments/<%=comment._id%>"><%=comment.comment%></a> - <b><%=comment.writer%></b> <i><%=comment.dateOfEntry %></i>
             </li>
             <% } %>
     </ul>

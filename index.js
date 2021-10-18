@@ -5,10 +5,14 @@ const app = express();
 const mongoose = require('mongoose');
 const Animal = require('./models/animal');
 const Comment = require('./models/comment');
+const methodOverride = require('method-override');
 // SERVER
 
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));        // OR app.set('views', process.cwd() + '/views' )
 
@@ -29,10 +33,17 @@ app.listen(config.PORT, () => {
     console.log(`app listening on PORT${config.PORT}!`);
 });
 
+// app.put('/comments/comment/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const updatedComment = req.body;
+//     await Comment.findOneAndUpdate({_id: id})
+//         .then(c => )
+// })
+
 app.get('/comments', (req, res) => {
     Comment.find()                      // can we use CACHE and save load time??
-        .then(c => {
-            res.render('./comments/comments', {comments: c})
+        .then(c => {
+            res.render('./comments/comments', { comments: c })
         })
         .catch(err => {
             console.log(err)
@@ -48,6 +59,23 @@ app.post('/comments', async (req, res) => {
             res.redirect('/comments')
         })
         .catch(err => console.log(err));
+})
+app.get('/comments/:id', async (req, res) => {
+    const { id } = req.params;
+    await Comment.findById({ _id: id })
+        .then(c => {
+            console.log(c);
+            res.render('./comments/comment', { comment: c })
+        })
+        .catch(err => console.log(err))
+})
+app.get('/comments/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    await Comment.findById({ _id: id })
+        .then(c => {
+            res.render('./comments/edit', { comment: c })
+        })
+        .catch(err => console.log(err))
 })
 app.get('/comments/newcomment', (req, res) => {
     res.render('./comments/newcomment')

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= comment._id %>
+    </title>
+</head>
+
+<body>
+    <div>
+        <h1>
+            <%= comment.writer %>
+        </h1>
+        said....
+    </div>
+    <h2>
+        <%= comment.comment %>
+    </h2>
+    <form action="/comments/<%=comment._id%>?_method=PUT" method="POST">
+        <label for="author">update author:</label>
+        <input type="text" id="author">
+        <label for="comment">update comment:</label>
+        <textarea id="comment" rows="5" cols="70"></textarea>
+        <button type="submit">Update</button>
+    </form>
+</body>
+
+</html>
