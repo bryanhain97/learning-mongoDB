@@ -49,6 +49,9 @@ app.get('/comments', (req, res) => {
             console.log(err)
         })
 })
+app.put('/comments/:id', (req, res) => {
+    res.send('PUT REQUEST!!!!')
+})
 
 app.post('/comments', async (req, res) => {
     console.log(req.body);
