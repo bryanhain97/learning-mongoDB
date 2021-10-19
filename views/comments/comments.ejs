@@ -10,15 +10,23 @@
 </head>
 
 <body>
-    <h1>Comments:</h1>
-    <ul>
-        <% for(let comment of comments){ %>
-            <li>
-                <a href="http://localhost:3000/comments/<%=comment._id%>"><%=comment.comment%></a> - <b><%=comment.writer%></b> <i><%=comment.dateOfEntry %></i>
-            </li>
-            <% } %>
-    </ul>
-    <button><a href="/comments/newcomment">Add new comment</a></button>
+    <div id="container">
+        <h1 id="headline">Rezensionen und Reviews: </h1>
+        <ul>
+            <% for(let comment of comments){ %>
+                <li>
+                    <a href="http://localhost:3000/comments/<%=comment._id%>">
+                        <%=comment.comment%>
+                    </a> - <b>
+                        <%=comment.writer%>
+                    </b> <i>
+                        <%=comment.dateOfEntry %>
+                    </i>
+                </li>
+                <% } %>
+        </ul>
+        <button><a href="/comments/newcomment">Add new comment</a></button>
+    </div>
 </body>
 
 </html>

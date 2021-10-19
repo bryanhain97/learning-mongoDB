@@ -1,3 +1,24 @@
-body {
-    background-color: bisque;
+html {
+    box-sizing: border-box;
+    font-size: calc(60% + 0.8vmin);
 }
+
+body {
+    margin: 0 0;
+    padding: 0 0;
+    background: url('./books.jpeg');
+    background-size: cover;
+}
+#container {
+    width: 90%;
+    margin: 0 auto;
+}
+#headline {
+    display: flex;
+    color: rgba(117, 86, 190, 0.87);
+    font-size: 3rem;
+    justify-content: center;
+    background: black;
+    border-radius: 10px;
+}
+
