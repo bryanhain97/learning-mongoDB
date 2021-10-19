@@ -43,6 +43,8 @@ app.get('/comments', (req, res) => {
         })
 })
 app.put('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    console.log(req.body);
     res.send('PUT REQUEST!!!!')
 })
 
