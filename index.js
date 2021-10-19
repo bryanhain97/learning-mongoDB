@@ -33,13 +33,6 @@ app.listen(config.PORT, () => {
     console.log(`app listening on PORT${config.PORT}!`);
 });
 
-// app.put('/comments/comment/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const updatedComment = req.body;
-//     await Comment.findOneAndUpdate({_id: id})
-//         .then(c => )
-// })
-
 app.get('/comments', (req, res) => {
     Comment.find()                      // can we use CACHE and save load time??
         .then(c => {
@@ -63,6 +56,11 @@ app.post('/comments', async (req, res) => {
         })
         .catch(err => console.log(err));
 })
+
+app.get('/comments/newcomment', (req, res) => {
+    res.render('./comments/newcomment')
+})
+
 app.get('/comments/:id', async (req, res) => {
     const { id } = req.params;
     await Comment.findById({ _id: id })
@@ -79,9 +77,6 @@ app.get('/comments/:id/edit', async (req, res) => {
             res.render('./comments/edit', { comment: c })
         })
         .catch(err => console.log(err))
-})
-app.get('/comments/newcomment', (req, res) => {
-    res.render('./comments/newcomment')
 })
 
 app.get('/animals', (req, res) => {
