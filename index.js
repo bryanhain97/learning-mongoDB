@@ -44,8 +44,14 @@ app.get('/comments', (req, res) => {
 })
 app.put('/comments/:id', (req, res) => {
     const { id } = req.params;
-    console.log(req.body);
-    res.send('PUT REQUEST!!!!')
+    const { comment, author } = req.body;
+    Comment.findByIdAndUpdate(id, { comment, writer: author }, { runValidators: true, new: true })
+        .then(updatedComment => {
+            console.log('update successful');
+            console.log(updatedComment);
+            res.redirect('/comments');
+        })
+        .catch(err => console.log(err));
 })
 
 app.post('/comments', async (req, res) => {
