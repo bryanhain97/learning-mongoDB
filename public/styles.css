@@ -15,7 +15,7 @@ body {
 }
 #headline {
     display: flex;
-    color: rgba(117, 86, 190, 0.87);
+    color: rgba(167, 154, 120, 0.87);
     font-size: 3rem;
     justify-content: center;
     background: black;
