@@ -53,6 +53,12 @@ app.put('/comments/:id', (req, res) => {
         })
         .catch(err => console.log(err));
 })
+app.delete('/comments/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletedComment = await Comment.findByIdAndDelete(id);
+    console.log(deletedComment)
+    res.redirect('/comments')
+})
 
 app.post('/comments', async (req, res) => {
     console.log(req.body);

@@ -18,6 +18,9 @@
     <h2><%= comment.comment %></h2>
     <button><a href="http://localhost:3000/comments">Back to comments</a></button>
     <button><a href="http://localhost:3000/comments/<%=comment._id%>/edit">edit comment</a></button>
+    <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
 </body>
 
 </html>
