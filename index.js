@@ -32,7 +32,9 @@ mongoose.connect(config.mongoDBAtlasURI, { useNewUrlParser: true })
 app.listen(config.PORT, () => {
     console.log(`app listening on PORT${config.PORT}!`);
 });
-
+app.get('/', (req, res) => {
+    res.render('index')
+})
 app.get('/comments', (req, res) => {
     Comment.find()                      // can we use CACHE and save load time??
         .then(c => {
@@ -56,7 +58,8 @@ app.put('/comments/:id', (req, res) => {
 app.delete('/comments/:id', async (req, res) => {
     const { id } = req.params;
     const deletedComment = await Comment.findByIdAndDelete(id);
-    console.log(deletedComment)
+    console.log(deletedComment);
+    console.log('successfully deleted comment');
     res.redirect('/comments')
 })
 
