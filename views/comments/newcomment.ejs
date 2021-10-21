@@ -12,12 +12,11 @@
     <h1>Add new comment</h1>
     <form action="/comments" method="post">
         <section>
-            <textarea name="comment" col="30" row="5" id="comment" placeholder="add comment"></textarea>
+            <label for="comment">new comment:</label>
+            <textarea name="comment" cols="50" rows="5" id="comment" placeholder="add comment"></textarea>
         </section>
-        <section>
-            <label for="writer"writer</label>
+            <label for="writer"writer>from: </label>
             <input type="text" name="writer" id="writer">
-        </section>
         <button type="submit">Submit</button>
     </form>
     <a href="http://localhost:3000/comments"><button>Back to Comments</button></a>
