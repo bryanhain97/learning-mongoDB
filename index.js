@@ -8,7 +8,7 @@ const Comment = require('./models/comment');
 const methodOverride = require('method-override');
 // SERVER
 
-app.use(express.static('public'));
+app.use(express.static(process.cwd() + '/public')); // absolute path to /public folder
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));

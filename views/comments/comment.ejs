@@ -12,10 +12,14 @@
 
 <body>
     <div>
-        <h1><%= comment.writer %></h1>
+        <h1>
+            <%= comment.writer %>
+        </h1>
         said....
     </div>
-    <h2><%= comment.comment %></h2>
+    <h2>
+        <%= comment.comment %>
+    </h2>
     <button><a href="http://localhost:3000/comments">Back to comments</a></button>
     <button><a href="http://localhost:3000/comments/<%=comment._id%>/edit">edit comment</a></button>
     <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
