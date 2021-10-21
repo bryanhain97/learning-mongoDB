@@ -21,4 +21,9 @@ body {
     background: black;
     border-radius: 10px;
 }
-
+.comment {
+    background:rgba(167, 154, 120, 0.87)
+}
+.comment-writer {
+    color: crimson;
+}
