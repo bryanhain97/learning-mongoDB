@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));        // OR app.set('views', process.cwd() + '/views' )
 
@@ -107,3 +108,7 @@ app.get('/animals', (req, res) => {
             console.log(err)
         })
 });
+
+app.use((req, res) => {
+    res.status(404).render('error404')
+}) // handling unmatched routes
